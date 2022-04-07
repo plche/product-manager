@@ -9,6 +9,15 @@ const readAllProducts = (request, response) => {
         });
 }
 
+const readOneSingleProduct = (request, response) => {
+    Product.findOne({_id: request.params.id})
+        .then(oneSingleProduct => response.status(200).json(oneSingleProduct))
+        .catch(err => {
+            response.statusMessage = `Hubo un error al ejecutar la búsqueda: ${err}`;
+            return response.status(400).end();
+        });
+}
+
 const createProduct = (request, response) => {
     Product.create(request.body)
         .then(createdProduct => response.status(201).json(createdProduct))
@@ -21,6 +30,7 @@ const createProduct = (request, response) => {
 
 const ProductController = {
     readAllProducts,
+    readOneSingleProduct,
     createProduct
 }
 

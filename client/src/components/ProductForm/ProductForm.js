@@ -12,7 +12,10 @@ const ProductForm = () => {
         e.preventDefault();
         //hacer una petición POST para crear un nuevo producto
         axios.post('http://localhost:8000/api/products/create', {title, price, description})
-            .then(response => console.log(response))
+            .then(response => {
+                console.log(response);
+                window.location.href = '/';
+            })
             .catch(err => console.log(err))
     }
     //onChange para actualizar title, price y description
